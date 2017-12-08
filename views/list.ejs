@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>mock平台</title>
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/list.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container" style="margin-top:50px;width:800px;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">接口描述</th>
+                    <th scope="col">接口url</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>查询列表</td>
+                    <td>/api/list/search</td>
+                    <td>
+                        <button type="button" class="js_sel btn btn-primary">修改</button>
+                        <button type="button" class="js_del btn btn-danger">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>删除用户</td>
+                    <td>/api/del/info</td>
+                    <td>
+                        <button type="button" class="js_sel btn btn-primary">修改</button>
+                        <button type="button" class="js_del btn btn-danger">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>删除用户</td>
+                    <td>/api/del/info</td>
+                    <td>
+                        <button type="button" class="js_sel btn btn-primary" >修改</button>
+                        <button type="button" class="js_del btn btn-danger">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/list.js"></script>
+</body>
+
+</html>
