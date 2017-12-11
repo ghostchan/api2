@@ -1,12 +1,15 @@
 const express=require('express');
 const static=require('express-static');
-
+var mockRouter = require("./router/mock");
 const bodyParser=require('body-parser');
 const consolidate=require('consolidate');
-const favicon = require('serve-favicon')
-const path = require('path')
+const favicon = require('serve-favicon');
+const path = require('path');
 
 const mysql = require("mysql");
+// 使用 Mock
+var Mock = require('mockjs')
+
 
 //连接池
 const db = mysql.createPool({
@@ -56,7 +59,9 @@ server.post('/add',function(req,res){
     var param=req.body.param;
     console.log(desc);
     console.log(desc.trim());
-    db.query(`INSERT INTO params VALUES("",${url},${desc},${param})`, (err, data) => {
+    var addApi = "insert into params(url,desc,param) values(?,?,?)";
+    var ins_param = [url, desc, param];
+    db.query(addApi,ins_param, (err, data) => {
         if (err) {
           console.log(err);
           res
@@ -68,6 +73,8 @@ server.post('/add',function(req,res){
         }
     });
 });
+//接口模拟
+server.use("/mock", mockRouter);
 
 //4、static数据
 server.use(static('./static'));
