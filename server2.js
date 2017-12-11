@@ -5,10 +5,11 @@ const bodyParser=require('body-parser');
 const consolidate=require('consolidate');
 const favicon = require('serve-favicon');
 const path = require('path');
+const cors=require('cors');
 
 const mysql = require("mysql");
 // 使用 Mock
-var Mock = require('mockjs')
+const Mock = require('mockjs')
 
 
 //连接池
@@ -74,7 +75,7 @@ server.post('/add',function(req,res){
     });
 });
 //接口模拟
-server.use("/mock", mockRouter);
+server.use("/mock", cors(),mockRouter);
 
 //4、static数据
 server.use(static('./static'));
