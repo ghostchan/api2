@@ -20,7 +20,7 @@ router.post("/", function(req, res) {
     if (error) {
       console.log(error.message);
     } else {
-      res.redirect('/list');
+      res.redirect('/');
     }
     connection.end();
   });

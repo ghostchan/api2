@@ -37,10 +37,10 @@ server.set('views','./views');
 server.engine('html',consolidate.ejs);
 
 //接收用户请求
+// server.get('/',function(req,res){
+//     res.render('index.ejs',{name:'chen'}); 
+// });
 server.get('/',function(req,res){
-    res.render('index.ejs',{name:'chen'}); 
-});
-server.get('/list',function(req,res){
     db.query("SELECT * FROM params order by id desc", (err, data) => {
         if (err) {
           console.log(err);
