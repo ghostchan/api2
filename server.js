@@ -1,24 +1,24 @@
 const express=require('express');
 const static=require('express-static');
-var mockRouter = require("./router/mock");
+const mockRouter = require("./router/mock");
+const addRouter = require("./router/add");
+const selRouter = require("./router/sel");
+const delRouter = require("./router/del");
+const updateRouter = require("./router/update");
 const bodyParser=require('body-parser');
 const consolidate=require('consolidate');
 const favicon = require('serve-favicon');
 const path = require('path');
 const cors=require('cors');
+const dbConfig=require('./db/config');
 
 const mysql = require("mysql");
 // 使用 Mock
-const Mock = require('mockjs')
+const Mock = require('mockjs');
 
 
-//连接池
-const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "2008",
-  database: "api"
-});
+
+const db = mysql.createConnection(dbConfig);
 var server=express();
 server.listen(8080);
 
@@ -41,7 +41,7 @@ server.get('/',function(req,res){
     res.render('index.ejs',{name:'chen'}); 
 });
 server.get('/list',function(req,res){
-    db.query("SELECT * FROM params", (err, data) => {
+    db.query("SELECT * FROM params order by id desc", (err, data) => {
         if (err) {
           console.log(err);
           res
@@ -54,26 +54,9 @@ server.get('/list',function(req,res){
     });
     
 });
-server.post('/add',function(req,res){
-    var desc=req.body.desc;
-    var url=req.body.apiurl;
-    var param=req.body.param;
-    console.log(desc);
-    console.log(desc.trim());
-    var addApi = "insert into params(url,desc,param) values(?,?,?)";
-    var ins_param = [url, desc, param];
-    db.query(addApi,ins_param, (err, data) => {
-        if (err) {
-          console.log(err);
-          res
-            .status(500)
-            .send("database error")
-            .end();
-        } else {
-            console.log("添加成功！");
-        }
-    });
-});
+server.use('/add',addRouter);
+server.use('/del',delRouter);
+server.use('/update',updateRouter);
 //接口模拟
 server.use("/mock", cors(),mockRouter);
 

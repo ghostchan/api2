@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mockjs=require('mockjs');
-const dbConfig = {
-    host: "localhost",
-    user: "root",
-    password: "2008",
-    database: "api"
-  };
+const dbConfig = require('../db/config');
 const mysql = require("mysql");
 router.post("/*", function(req, res) {
   var url = req.url;
